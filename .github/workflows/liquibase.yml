@@ -22,10 +22,13 @@ jobs:
 
       - name: Descargar e instalar Liquibase
         run: |
+          mkdir liquibase-bin
+          cd liquibase-bin
           curl -L -o liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v5.0.1/liquibase-5.0.1.tar.gz
           tar -xvzf liquibase.tar.gz
           chmod +x liquibase
           ./liquibase --version
+          cd ..
 
       - name: Ejecutar migraciones con Liquibase
         env:
@@ -33,7 +36,7 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          liquibase \
+          ./liquibase-bin/liquibase \
             --changeLogFile=changelog.sql \
             --url=$DB_URL \
             --username=$DB_USER \
