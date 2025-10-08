@@ -1,0 +1,13 @@
+# Ignorar configuración sensible
+liquibase.properties
+lib/
+*.jar
+*.zip
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
