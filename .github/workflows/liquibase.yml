@@ -20,18 +20,20 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Descargar Liquibase
+      - name: Descargar e instalar Liquibase
         run: |
           curl -L -o liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v5.0.1/liquibase-5.0.1.tar.gz
           tar -xvzf liquibase.tar.gz
+          sudo mv liquibase-5.0.1/liquibase /usr/local/bin/liquibase
+          liquibase --version
 
-      - name: Ejecutar migraciones
+      - name: Ejecutar migraciones con Liquibase
         env:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          liquibase/liquibase \
+          liquibase \
             --changeLogFile=changelog.sql \
             --url=$DB_URL \
             --username=$DB_USER \
