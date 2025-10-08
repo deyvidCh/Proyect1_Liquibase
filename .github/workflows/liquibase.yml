@@ -24,9 +24,8 @@ jobs:
         run: |
           curl -L -o liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v5.0.1/liquibase-5.0.1.tar.gz
           tar -xvzf liquibase.tar.gz
-          sudo mv liquibase /usr/local/bin/liquibase
-          chmod +x /usr/local/bin/liquibase
-          liquibase --version
+          chmod +x liquibase
+          ./liquibase --version
 
       - name: Ejecutar migraciones con Liquibase
         env:
