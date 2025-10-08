@@ -30,6 +30,12 @@ jobs:
           ./liquibase --version
           cd ..
 
+      - name: Descargar conector JDBC de MySQL
+        run: |
+          mkdir -p lib
+          curl -L -o lib/mysql-connector-j-8.4.0.jar https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar
+          ls lib
+
       - name: Ejecutar migraciones con Liquibase
         env:
           DB_URL: ${{ secrets.DB_URL }}
@@ -38,6 +44,7 @@ jobs:
         run: |
           ./liquibase-bin/liquibase \
             --changeLogFile=changelog.sql \
+            --classpath=lib/mysql-connector-j-8.4.0.jar \
             --url=$DB_URL \
             --username=$DB_USER \
             --password=$DB_PASSWORD \
