@@ -21,17 +21,17 @@ CREATE TABLE pedidos (
         REFERENCES clientes(id)
 );
 
---changeset wilmer:4
+--changeset deyvid:4
 INSERT INTO pedidos (cliente_id, fecha, total)
 VALUES 
     (1, '2025-10-05', 250.00),
     (1, '2025-10-06', 175.50);
 
---changeset wilmer:5
+--changeset deyvid:5
 ALTER TABLE pedidos
 ADD COLUMN estado VARCHAR(20) DEFAULT 'pendiente' AFTER total;
 
---changeset deyvid:6
+--changeset iliana:6
 CREATE INDEX idx_fecha_pedidos
 ON pedidos (fecha);
 
