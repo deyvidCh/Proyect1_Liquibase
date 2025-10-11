@@ -20,20 +20,19 @@ CREATE TABLE pedidos (
         FOREIGN KEY (cliente_id)
         REFERENCES clientes(id)
 );
-
 --changeset deyvid:4
 INSERT INTO pedidos (cliente_id, fecha, total)
 VALUES 
     (1, '2025-10-05', 250.00),
     (1, '2025-10-06', 175.50);
 
---changeset deyvid:5
-ALTER TABLE pedidos
-ADD COLUMN estado VARCHAR(20) DEFAULT 'pendiente' AFTER total;
-
+    --changeset deyvid:5
+    ALTER TABLE pedidos
+    ADD COLUMN estado VARCHAR(20) DEFAULT 'pendiente' AFTER total;
+        
 --changeset iliana:6
 CREATE INDEX idx_fecha_pedidos
-ON pedidos (fecha);
+ON pedidos (fecha);  
 
 --changeset iliana:7
 UPDATE pedidos
